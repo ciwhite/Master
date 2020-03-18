@@ -17,9 +17,11 @@ Researcher degrees of freedom are an issue in disciplines that rely heavily on f
 
 ![Data Analysis Workflow](Workflow.PNG)
 
+Read the book for a much more developed workflow practice.
+
 ## Data Import
 
-Read the book for a much more developed workflow practice. The information contain here is a quick and dirty way to get set up data import, the first stage of the workflow, a stage that is confusing and daunting given the many different applications that exist to assist in streamlining and data sharing.
+The information contain here is a quick and dirty way to get set up data import, the first stage of the workflow, a stage that is confusing and daunting given the many different applications that exist to assist in streamlining and data sharing.
 
 I will walk through three topics:
 
@@ -102,7 +104,16 @@ Now that the project is set up and connected to your online github profile you c
 
 1. In the top right panel of R studio go to the `Git` tab.  
 2. As this is the first time we are commiting (uploading) files, click on the `commit` sub tab  
-3. 
+3. Check the files that you would like to `commit`, write some commit comment and then click the commit button.
+  + ![Commit](Commit.png)
+4. Close the box that pops up and then click the `push` button. This will upload or `push` the committed files to the online repo.
+  + ![Push](Push.PNG)
+5. Check the online repo, have the files been uploaded?
+
+Your project can now be shared with other people, just send them a link to the github repository and they can make a `pull` request. Let's try it now.
+
+
+
 
 
 
