@@ -42,14 +42,10 @@ Why is this useful? Well consider if you sent your datafiles and scipts to someo
 #relative address
 temporal <- read.csv("Temporal_data.csv")
 
-#install.packages("kableExtra")
-#library(kableExtra)
-kable(temporal) %>%
-  kable_styling(bootstrap_options = c("striped", "hover"))
-
 #absolute address, wont be transferable and so hinders ease of reproducibility
 Transect <- read.csv("~/PhD/Data/Dimensions of Natural Capital/Transect Data/Nat_Cap_Dim_Transect_Data.csv")
 ```
+
 
 
 ### Packrat
@@ -107,3 +103,56 @@ Now that the project is set up and connected to your online github profile you c
 1. In the top right panel of R studio go to the `Git` tab.  
 2. As this is the first time we are commiting (uploading) files, click on the `commit` sub tab  
 3. 
+
+
+
+## Tidy Data
+
+![Data Analysis Workflow](Workflow.PNG)
+
+
+Tidy Data
+```{r}
+#install.packages("kableExtra")
+#library(kableExtra)
+kable(head(temporal)) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+#data is not tidy, each row is multiple observations, need to create a month variable.
+#install.packages("tidyr")
+library("tidyr")
+
+kable(temporal[1:2,] %>%
+  pivot_longer(c("May", "June", "July", "August"), names_to = "month", values_to ="size", names_ptypes = list(month = factor()))) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+
+
+## Visualisation
+
+![Data Analysis Workflow](Workflow.PNG)
+
+An example of using ggplot
+```{r}
+#setting my palette
+urbanpalette <- c("#4575B4","#74ADD1","#ABD9E9", "grey",
+                 "grey","grey","grey")
+
+#setting factor levels so they will be displayed as such in legend
+factor(temporal$level, levels = c("High Urban","Medium Urban","Low Urban","Semi Nat","Low Agricultural","Medium Agricultural","High Agricultural"))
+
+
+#installing ggplot and loading library
+#install.packages("ggplot2")
+library("ggplot2")
+
+temporal %>%
+  pivot_longer(c("May", "June", "July", "August"), names_to = "month", values_to ="size", names_ptypes = list(month = factor())) %>%
+  ggplot( aes(x=month, y=size)) +
+    geom_jitter(aes(col=level), size = 3, width = 0.1) +
+       scale_colour_manual(values= urbanpalette) +
+       coord_cartesian(ylim=c(0,150)) +
+       labs(title = "", y="Size", x="", caption = "") +
+        theme_bw()
+```
